@@ -1,28 +1,41 @@
-import React from "react";
+import React, {useState} from "react";
+import TodoItem from "./TodoItem";
+import "../../styles/index.css";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+function Home() {
+	const [tasks, setTasks] = useState ([]);
+	const [input, setInput] = useState("");
 
-//create your first component
-const Home = () => {
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter" && input.trim() !== "") {
+			setTasks([...tasks, input.trim()]);
+			setInput("");
+		}
+	};
+	const deleteTask = (index) => {
+		setTasks(tasks.filter((_, i) => i !== index));
+	};
 	return (
-		<div className="text-center">
-            
-
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="todo-container">
+			<h1>TODOS</h1>
+			<input
+			type="text"
+			placeholder="Añadir tarea"
+			value={input}
+			onChange={(e) => setInput(e.target.value)}
+			onKeyDown={handleKeyDown}
+			/>
+			<ul>
+				{tasks.length === 0 ? (
+					<li className="empty">No hay tareas, añadir tareas</li>
+				) : (
+					tasks.map((task, index) => (
+						<TodoItem key={index} task={task} index={index} onDelete={deleteTask} />
+					))
+					)}
+			</ul>
 		</div>
 	);
-};
+}
 
 export default Home;
