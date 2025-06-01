@@ -34,6 +34,9 @@ function Home() {
 					))
 					)}
 			</ul>
+			<div className="contador">
+				{tasks.length} 
+			</div>
 		</div>
 	);
 }

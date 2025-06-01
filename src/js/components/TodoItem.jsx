@@ -11,7 +11,7 @@ function TodoItem ({ task, index, onDelete }) {
         {hover && (
             <button
                 onClick={() => onDelete(index)} className="delete-btn"
-            />
+            >X</button>
         )}
         </li>
     );
