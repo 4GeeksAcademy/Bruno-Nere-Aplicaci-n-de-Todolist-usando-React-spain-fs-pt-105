@@ -1,19 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
-function TodoItem ({ task, index, onDelete }) {
-    const [hover, setHover] = useState(false);
-    return (
-        <li
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        >
-        {task}
-        {hover && (
-            <button
-                onClick={() => onDelete(index)} className="delete-btn"
-            >X</button>
-        )}
-        </li>
-    );
+function TodoItem({ task, onDelete }) {
+  return (
+    <li>
+      {task.label}
+      <button className="delete-btn" onClick={() => onDelete(task.id)}>❌</button>
+    </li>
+  );
 }
+
 export default TodoItem;
